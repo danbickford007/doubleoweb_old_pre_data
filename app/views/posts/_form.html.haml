@@ -1,0 +1,15 @@
+= form_for @post, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :title, :class => 'control-label'
+    .controls
+      = f.text_field :title, :class => 'text_field left'
+      = f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name'), :class=>'right'
+  .control-group
+    .controls
+      = f.text_area :content, :class => 'text_field', :rows=>20, :style=>'width:700px'
+  .form-actions
+    = f.hidden_field :country_id, :value=>cookies[:country_id]
+    = f.hidden_field :state_id, :value=>cookies[:state_id]
+    = f.hidden_field :city_id, :value=>cookies[:city_id]
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), posts_path, :class => 'btn'

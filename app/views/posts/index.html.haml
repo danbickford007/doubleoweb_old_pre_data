@@ -1,0 +1,14 @@
+%h3 Current Listings
+%hr
+%br
+
+%table
+  - if @posts.present?
+    - @posts.each do |post|
+      %tr
+        %td{:style=>'width:300px'}= post.title
+        %td= link_to 'Show', post
+  -else
+    %h4
+      Welcome
+%br
