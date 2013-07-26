@@ -1,17 +1,25 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
-  def index
+  before_filter :set_cookies, :only=>:index
+  before_filter :authenticate, :only=>:index
+  def set_cookies
     if params[:country_id]
       cookies[:country_id] = params[:country_id]
-      states = Country.find(params[:country_id]).states
     end
     if params[:state_id]
       cookies[:state_id] = params[:state_id]
-      cities = State.find(params[:state_id]).cities
     end
     if params[:city_id]
       cookies[:city_id] = params[:city_id]
+    end
+  end
+
+  def index
+    if params[:country_id]
+      states = Country.find(params[:country_id]).states
+    end
+    if params[:state_id]
+      cities = State.find(params[:state_id]).cities
     end
     if params[:category_id]
       @posts = Post.where(:city_id=>cookies[:city_id], :category_id=>params[:category_id])
@@ -37,6 +45,9 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        Thread.new do
+          ValidationMailer.welcome_email('danbickford007@yahoo.com', '1234').deliver
+        end
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render action: 'show', status: :created, location: @post }
       else

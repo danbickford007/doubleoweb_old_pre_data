@@ -1,4 +1,5 @@
 Doubleoweb::Application.routes.draw do
+  get "validations/index"
   root :to=>'posts#index'
   resources :posts
 
