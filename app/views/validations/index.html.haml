@@ -4,7 +4,7 @@
   %p
     =@post.content
   %hr
-  =link_to 'Publish', validations_new(:id=>@post.id)
+  =link_to 'Publish', validations_new_path(:id=>@post.id)
 -else
   %h1
     Post was not found!
