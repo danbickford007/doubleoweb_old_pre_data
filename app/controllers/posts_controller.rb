@@ -44,11 +44,12 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.text_title = post_params[:title]
+    @post.validation_key = "#{Rand.new.rand(0..9999)}-#{Rand.new.rand(500.999999)}"
 
     respond_to do |format|
       if @post.save
         Thread.new do
-          ValidationMailer.welcome_email('danbickford007@yahoo.com', '1234').deliver
+          ValidationMailer.welcome_email('danbickford007@yahoo.com', @post.validation_key).deliver
         end
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render action: 'show', status: :created, location: @post }
