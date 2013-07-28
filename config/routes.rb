@@ -2,6 +2,7 @@ Doubleoweb::Application.routes.draw do
   get "search/index"
   get "search/new"
   get "validations/index"
+  get "validations/new"
   root :to=>'posts#index'
   resources :posts
 

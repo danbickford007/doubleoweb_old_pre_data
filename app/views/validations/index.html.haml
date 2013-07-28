@@ -1,2 +1,11 @@
-%h1 Validations#index
-%p Find me in app/views/validations/index.html.haml
+-if @post
+  %h1 
+    =@post.title
+  %p
+    =@post.content
+  %hr
+  =link_to 'Publish', validations_new(:id=>@post.id)
+-else
+  %h1
+    Post was not found!
+
