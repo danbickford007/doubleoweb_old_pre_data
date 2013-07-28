@@ -1,6 +1,6 @@
 class ValidationsController < ApplicationController
   def index
-    @post = Post.where(:validation_key=>params[:validation_key])
+    @post = Post.where(:validation_key=>params[:validation_key]).first
   end
 
   def new
