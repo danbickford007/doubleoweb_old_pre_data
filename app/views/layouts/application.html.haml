@@ -37,6 +37,11 @@
         .span3
           .well.sidebar-nav
             %ul.nav.nav-list
+              %li 
+                Search: 
+                =form_tag search_new_path, :method=>'get' do
+                  =text_field_tag 'search'
+                  =submit_tag 'search'
               %li.nav-header Categories
               -Category.all.each do |cat|
                 %li 

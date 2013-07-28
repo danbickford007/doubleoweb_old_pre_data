@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_filter :set_cookies, :only=>:index
   before_filter :authenticate, :only=>:index
+  
   def set_cookies
     if params[:country_id]
       cookies[:country_id] = params[:country_id]
@@ -42,6 +43,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.text_title = post_params[:title]
 
     respond_to do |format|
       if @post.save

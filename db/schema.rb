@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726024931) do
+ActiveRecord::Schema.define(version: 20130727230710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20130726024931) do
     t.integer  "category_id"
     t.string   "validation_key"
     t.boolean  "active"
+    t.text     "text_title"
   end
 
   create_table "states", force: true do |t|

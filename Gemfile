@@ -9,6 +9,8 @@ gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 gem 'less-rails'
 gem 'haml-rails'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
