@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.text_title = post_params[:title]
-    @post.validation_key = "#{Rand.new.rand(0..9999)}-#{Rand.new.rand(500.999999)}"
+    @post.validation_key = "#{Random.new.rand(0..9999)}-#{Random.new.rand(500.999999)}"
 
     respond_to do |format|
       if @post.save
