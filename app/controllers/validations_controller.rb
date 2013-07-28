@@ -6,6 +6,6 @@ class ValidationsController < ApplicationController
   def new
     Post.find(params[:id]).update_attribute(:active, true)
     flash[:success] = 'Post successfully activated'
-    redirect_to validations_new_path
+    redirect_to validations_index_path
   end
 end
