@@ -35,26 +35,43 @@
 
       .row-fluid
         .span3
-          .well.sidebar-nav
+          .well.sidebar-nav{:style=>'height:1100px'}
             %ul.nav.nav-list
               %li 
                 Search: 
                 =form_tag search_new_path, :method=>'get' do
                   =text_field_tag 'search'
                   =submit_tag 'search'
-              %li.nav-header Categories
-              -Category.all.each do |cat|
-                %li 
-                  =link_to cat.name, posts_path(:category_id=>cat.id)
+              %div.left
+                %li.nav-header
+                  For Sale
+                %li
+                  %ul.nav.nav-list
+                    -Category.all.each do |cat|
+                      %li 
+                        =link_to cat.name, posts_path(:category_id=>cat.id)
+              %div.right
+                %li.nav-header
+                  Jobs
+                %li
+                  %ul.nav.nav-list
+                    -Category.all.each do |cat|
+                      %li 
+                        =link_to cat.name, posts_path(:category_id=>cat.id)
 
         .span9
           = bootstrap_flash
-          Country
-          =select_tag :country, options_from_collection_for_select(Country.all, 'id', 'name', cookies[:country_id]), :include_blank=>true, :onchange=>"selectCountry(this.value)"
-          State
-          =select_tag :state, options_from_collection_for_select((cookies[:country_id].present? ? Country.find(cookies[:country_id]).states : []), 'id', 'name', cookies[:state_id]), :onchange=>"selectState(this.value)"
-          City
-          =select_tag :city, options_from_collection_for_select((cookies[:state_id].present? ? State.find(cookies[:state_id]).cities : []), 'id', 'name', cookies[:city_id]), :onchange=>"selectCity(this.value)"
+          %ul
+            %li.left
+              =label_tag Country
+              =select_tag :country, options_from_collection_for_select(Country.all, 'id', 'name', cookies[:country_id]), :include_blank=>true, :onchange=>"selectCountry(this.value)"
+            %li.left
+              =label_tag State
+              =select_tag :state, options_from_collection_for_select((cookies[:country_id].present? ? Country.find(cookies[:country_id]).states : []), 'id', 'name', cookies[:state_id]), :onchange=>"selectState(this.value)"
+            %li.left
+              =label_tag City
+              =select_tag :city, options_from_collection_for_select((cookies[:state_id].present? ? State.find(cookies[:state_id]).cities : []), 'id', 'name', cookies[:city_id]), :onchange=>"selectCity(this.value)"
+          %div{:style=>'clear:both'}
           %hr
           = yield
     
