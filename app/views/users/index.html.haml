@@ -1,0 +1,22 @@
+%h4
+  Login
+  %hr
+  =form_tag login_path do
+    =label_tag :email
+    =text_field_tag :email
+    =label_tag :passcode
+    =text_field_tag :passcode
+    %br
+    =submit_tag :login
+
+%h4
+  Create an account to access your listings more easily.
+  %hr
+  -user = User.new
+  =form_for user do |f|
+    =f.label :email
+    =f.text_field :email
+    =f.label :passcode
+    =f.text_field :passcode
+    %br
+    =f.submit

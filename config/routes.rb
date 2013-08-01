@@ -1,4 +1,7 @@
 Doubleoweb::Application.routes.draw do
+  get 'login' => 'users#login', :as=>'login'
+  resources :users
+
   get "search/index"
   get "search/new"
   get "validations/index"
