@@ -35,3 +35,11 @@ window.populateOptions = (states, cities) ->
     cityEle.append("<option></option>")
     for city in cities
       cityEle.append("<option value='"+city['id']+"'>"+city['name']+"</option>")
+
+
+window.slide = (theClass) ->
+  theClass = $("."+theClass)
+  if theClass.css('display') == "none"
+    theClass.slideDown()
+  else
+    theClass.slideUp()

@@ -37,7 +37,7 @@ namespace :categories do
     'photo+video',
     'toys+games',
     'video gaming'].each do |category|
-      Category.find_or_create_by_name(category)
+      Category.find_or_create_by_name_and_post_type(category, 'for_sale')
     end
 
  

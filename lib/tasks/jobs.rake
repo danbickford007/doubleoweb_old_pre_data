@@ -33,7 +33,7 @@ namespace :jobs do
     'writing / editing',
     '[ETC]',
     '[ part-time ] '].each do |job|
-      Job.create(:description=>job)
+      Category.find_or_create_by_name_and_post_type(job, 'jobs')
     end
   end
 end

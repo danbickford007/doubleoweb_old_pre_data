@@ -34,7 +34,7 @@
     .container-fluid
 
       .row-fluid
-        .span4
+        .span3
           .well.sidebar-nav
             %ul.nav.nav-list
               %li 
@@ -42,22 +42,29 @@
                 =form_tag search_new_path, :method=>'get' do
                   =text_field_tag 'search'
                   =submit_tag 'search'
-              %div.left
-                %li.nav-header
+              %li.nav-header
+                .left 
                   For Sale
-                %li
-                  %ul.nav.nav-list
-                    -Category.all.each do |cat|
-                      %li 
-                        =link_to cat.name, posts_path(:category_id=>cat.id)
-              %div.left
-                %li.nav-header
+                .right
+                  =link_to_function image_tag('icon_expand.gif'), "slide('for_sale')"
+                %div{:style=>"clear:both"}
+              %li
+                %ul.nav.nav-list.for_sale{:style=>'display:none'}
+                  -Category.where(:post_type=>'for_sale').each do |cat|
+                    %li 
+                      =link_to cat.name, posts_path(:category_id=>cat.id)
+              %li.nav-header
+                %div{:style=>"clear:both"}
+                .left
                   Jobs
-                %li
-                  %ul.nav.nav-list
-                    -Job.all.each do |cat|
-                      %li 
-                        =link_to cat.description, posts_path(:category_id=>cat.id)
+                .right
+                  =link_to_function image_tag('icon_expand.gif'), "slide('jobs')"
+                %div{:style=>"clear:both"}
+              %li
+                %ul.nav.nav-list.jobs{:style=>'display:none'}
+                  -Category.where(:post_type=>'jobs').each do |cat|
+                    %li 
+                      =link_to cat.name, posts_path(:category_id=>cat.id)
 
         .span8
           = bootstrap_flash
