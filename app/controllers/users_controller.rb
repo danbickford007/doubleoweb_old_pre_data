@@ -2,9 +2,10 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def login
-    user User.find_by_email_and_passcode(params[:email], params[:passcode]).first
+    user = User.find_by_email_and_passcode(params[:email], params[:passcode])
     if user.present?
       User.current = user
+      flash[:success] = 'Successfully logged in'
       redirect_to '/'
     else
       flash[:error] = 'User does not exist'
@@ -17,27 +18,22 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
   end
 
-  # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
   def edit
   end
-
-  # POST /users
-  # POST /users.json
+  
   def create
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
+        User.current = @user
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else

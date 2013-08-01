@@ -34,8 +34,8 @@
     .container-fluid
 
       .row-fluid
-        .span3
-          .well.sidebar-nav{:style=>'height:1100px'}
+        .span4
+          .well.sidebar-nav
             %ul.nav.nav-list
               %li 
                 Search: 
@@ -50,16 +50,16 @@
                     -Category.all.each do |cat|
                       %li 
                         =link_to cat.name, posts_path(:category_id=>cat.id)
-              %div.right
+              %div.left
                 %li.nav-header
                   Jobs
                 %li
                   %ul.nav.nav-list
-                    -Category.all.each do |cat|
+                    -Job.all.each do |cat|
                       %li 
-                        =link_to cat.name, posts_path(:category_id=>cat.id)
+                        =link_to cat.description, posts_path(:category_id=>cat.id)
 
-        .span9
+        .span8
           = bootstrap_flash
           %ul
             %li.left
