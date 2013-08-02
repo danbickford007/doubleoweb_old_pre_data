@@ -43,7 +43,7 @@
                   =text_field_tag 'search'
                   =submit_tag 'search'
               %li.nav-header
-                .left 
+                .left{:onclick=>"slide('for_sale')"} 
                   For Sale
                 .right
                   =link_to_function image_tag('icon_expand.gif'), "slide('for_sale')"
@@ -55,7 +55,7 @@
                       =link_to cat.name, posts_path(:category_id=>cat.id)
               %li.nav-header
                 %div{:style=>"clear:both"}
-                .left
+                .left{:onclick=>"slide('jobs')"} 
                   Jobs
                 .right
                   =link_to_function image_tag('icon_expand.gif'), "slide('jobs')"

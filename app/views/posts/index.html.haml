@@ -1,4 +1,5 @@
-%h3 Current Listings - 
+%h3 
+  =active_category
 %hr
 %br
 
@@ -10,5 +11,8 @@
         %td= link_to 'Show', post
   -else
     %h4
-      Please select a category to view recent posts.
+      -if params[:category_id]
+        There are no listings for this category right now.
+      -else
+        Please select your location above and then select the category on the right to get started.
 %br

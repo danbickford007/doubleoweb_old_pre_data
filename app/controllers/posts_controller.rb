@@ -22,7 +22,7 @@ class PostsController < ApplicationController
     if params[:state_id]
       cities = State.find(params[:state_id]).cities
     end
-    @posts = Post.where(:city_id => cookies[:city_id], :category_id => params[:cateogory_id], :active => true)
+    @posts = Post.where(:city_id => cookies[:city_id], :category_id => params[:category_id], :active => true)
     respond_to do |format|
       format.js {render :js=>"populateOptions(#{states.to_json}, #{cities.to_json})"}
       format.html
