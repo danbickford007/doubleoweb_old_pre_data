@@ -29,5 +29,9 @@
     = f.hidden_field :country_id, :value=>cookies[:country_id]
     = f.hidden_field :state_id, :value=>cookies[:state_id]
     = f.hidden_field :city_id, :value=>cookies[:city_id]
-    = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), posts_path, :class => 'btn'
+    -if params[:publish]
+      = f.hidden_field :publish, :value=>true
+      = f.submit nil, :class => 'btn btn-primary'
+    -else
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), posts_path, :class => 'btn'

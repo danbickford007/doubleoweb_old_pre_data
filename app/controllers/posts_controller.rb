@@ -40,7 +40,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params).generate_post(params[:title], params[:email])
+    @post = Post.new(post_params).generate_post(params[:post][:title], params[:email], params)
 
     respond_to do |format|
       if @post.save
@@ -57,9 +57,13 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { head :no_content }
+      if Email.last.posts.where(:id => params[:id]).update_attributes(post_params.except(:publish))
+        if post_params[:publish]
+          format.html { redirect_to validations_index_path, notice: 'Post was successfully updated.' }
+        else
+          format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+          format.json { head :no_content }
+        end
       else
         format.html { render action: 'edit' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -85,6 +89,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :owner_id, :city_id, :category_id, :email)
+      params.require(:post).permit(:title, :content, :owner_id, :city_id, :category_id, :email, :publish)
     end
 end
