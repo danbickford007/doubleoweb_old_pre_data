@@ -4,6 +4,24 @@
     .controls
       = f.text_field :title, :class => 'text_field left'
       = f.select :category_id, options_from_collection_for_select(Category.all, 'id', 'name'), :class=>'right'
+      %br
+      -if !User.current
+        =label_tag :email, 'Email:'
+        =text_field_tag :email, '', :class=>'left'
+      -else
+        =hidden_field_tag :email, User.current.email
+      %hr
+      Show email as:
+      %br
+      %ul
+        %li.left.marginedLeft
+          =radio_button_tag :actual, true, false, :class=>'left'
+        %li.left.marginedLeft
+          =label_tag :actual, 'Actual', :class=>'left'
+        %li.left.marginedLeft
+          =radio_button_tag :anonymous, true, true, :class=>'left'
+        %li.left.marginedLeft
+          =label_tag :anonymous, 'Anonymous', :class=>'left'
   .control-group
     .controls
       = f.text_area :content, :class => 'text_field', :rows=>20, :style=>'width:700px'

@@ -40,15 +40,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.text_title = post_params[:title]
-    @post.validation_key = "#{Random.new.rand(0..9999)}-#{Random.new.rand(500.999999)}"
+    @post = Post.new(post_params).generate_post(params[:title], params[:email])
 
     respond_to do |format|
       if @post.save
-        Thread.new do
-          ValidationMailer.welcome_email('danbickford007@yahoo.com', @post.validation_key).deliver
-        end
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render action: 'show', status: :created, location: @post }
       else
@@ -90,6 +85,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :content, :owner_id, :city_id, :category_id)
+      params.require(:post).permit(:title, :content, :owner_id, :city_id, :category_id, :email)
     end
 end
