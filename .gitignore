@@ -16,3 +16,4 @@
 /tmp
 *.swo
 *.swp
+solr/*
