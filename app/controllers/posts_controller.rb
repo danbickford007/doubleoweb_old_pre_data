@@ -56,10 +56,11 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    @post = Post.where(:id => params[:id]).first
     respond_to do |format|
-      if Email.last.posts.where(:id => params[:id]).update_attributes(post_params.except(:publish))
+      if @post.update_attributes(post_params.except(:publish))
         if post_params[:publish]
-          format.html { redirect_to validations_index_path, notice: 'Post was successfully updated.' }
+          format.html { redirect_to validations_index_path(:validation_key => @post.validation_key), notice: 'Post was successfully updated.' }
         else
           format.html { redirect_to @post, notice: 'Post was successfully updated.' }
           format.json { head :no_content }

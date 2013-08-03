@@ -17,11 +17,11 @@
         %li.left.marginedLeft
           =radio_button_tag :actual, true, false, :class=>'left'
         %li.left.marginedLeft
-          =label_tag :actual, 'Actual', :class=>'left'
+          =label_tag :actual_true, 'Actual', :class=>'left'
         %li.left.marginedLeft
-          =radio_button_tag :anonymous, true, true, :class=>'left'
+          =radio_button_tag :actual, false, true, :class=>'left'
         %li.left.marginedLeft
-          =label_tag :anonymous, 'Anonymous', :class=>'left'
+          =label_tag :actual_false, 'Anonymous', :class=>'left'
   .control-group
     .controls
       = f.text_area :content, :class => 'text_field', :rows=>20, :style=>'width:700px'
