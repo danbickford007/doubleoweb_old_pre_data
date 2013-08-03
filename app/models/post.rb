@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
     params[:post].merge!(:validation_key => key)
     params[:post].reject!{|k, v| k == "country_id"}
     params[:post].reject!{|k, v| k == "state_id"}
-    send_email(email, key)
+    send_email(email.name, key)
     params[:post].permit!
     email.posts.create(params[:post])
   end
